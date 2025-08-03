@@ -34,7 +34,7 @@
           <el-button type="primary" @click="handleRecord">录入</el-button>
         </el-form-item>
       </el-form>
-      <!-- <RecordTable></RecordTable> -->
+      <RecordTable></RecordTable>
     </div>
     <div class="pagination-wrapper">
       <el-pagination background layout="prev, pager, next" :total="1000" />
@@ -45,8 +45,8 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import RecordTable from '../components/UserRecord.vue'
-import RecordDialog from '../components/RecordAndApproveDialog.vue'
+import RecordTable from '@/components/UserRecord.vue'
+import RecordDialog from '@/components/RecordAndApproveDialog.vue'
 
 const isShowRecordDialog = ref(false)
 

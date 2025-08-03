@@ -1,33 +1,40 @@
-// src/router/index.ts
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import User from '@/views/User.vue'
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    redirect: '/home'
+    path: "/",
+    redirect: "/home",
   },
   {
-    path: '/recordOrder',
-    name: 'RecordOrder',
-    component: () => import('@/views/RecordOrder.vue')
+    path: "/reimburse",
+    name: "Reimburse",
+    component: () => import("@/views/Reimburse.vue"),
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: () => import('@/views/Home.vue')
+    path: "/reimburse",
+    name: "Reimburse",
+    component: () => import("@/views/Reimburse.vue"),
   },
   {
-    path: '/user',
-    name: 'User',
-    component: User
-  }
-]
+    path: "/reimburse",
+    name: "Reimburse",
+    component: () => import("@/views/Reimburse.vue"),
+  },
+  {
+    path: "/reimburse",
+    name: "Reimburse",
+    component: () => import("@/views/Reimburse.vue"),
+  },
+  {
+    path: "/recordOrder",
+    name: "RecordOrder",
+    component: () => import("@/views/RecordOrder/index.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

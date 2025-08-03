@@ -5,8 +5,7 @@
     <div class="main">
       <Header />
       <header>
-        <div class="logo">
-        </div>
+        <div class="logo"></div>
       </header>
       <router-view />
     </div>
@@ -14,17 +13,23 @@
 </template>
 
 <script setup lang="ts">
-import Sidebar from './components/Sidebar.vue'
-import Header from './components/Header.vue'
+import Sidebar from "./components/Sidebar.vue";
+import Header from "./components/Header.vue";
 </script>
 
 <style>
-html, body {
-  width: 100%;
-  height: 100%;
+body,
+html {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 .layout {
   display: flex;

@@ -9,16 +9,9 @@
           <el-input v-model="formInline.carNumber" placeholder="车牌号" clearable />
         </el-form-item>
         <el-form-item label="司机名称">
-          <el-select
-            v-model="formInline.userName"
-            placeholder="司机名称"
-            clearable
-          >
-            <el-option label="Zone one" value="shanghai" />
-            <el-option label="Zone two" value="beijing" />
-          </el-select>
+          <el-input v-model="formInline.carNumber" placeholder="司机名称" clearable />
         </el-form-item>
-         <el-form-item label="审批状态">
+        <el-form-item label="审批状态">
           <el-select
             v-model="formInline.userName"
             placeholder="审批状态"
@@ -34,24 +27,23 @@
           <el-button type="primary" @click="handleRecord">录入</el-button>
         </el-form-item>
       </el-form>
-      <!-- <RecordTable></RecordTable> -->
+      <ReimburseTable></ReimburseTable>
     </div>
     <div class="pagination-wrapper">
       <el-pagination background layout="prev, pager, next" :total="1000" />
     </div>
-    <RecordDialog v-model:visible="isShowRecordDialog"></RecordDialog>
+    <ReimburseDialog v-model:visible="isShowRecordDialog"></ReimburseDialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import RecordTable from '../components/UserRecord.vue'
-import RecordDialog from '../components/RecordAndApproveDialog.vue'
+import ReimburseTable from '../components/ReimburseTable.vue'
+import ReimburseDialog from '../components/ReimburseDialog.vue'
 
 const isShowRecordDialog = ref(false)
 
 const formInline = reactive({
-  month: '',
   carNumber: '',
   userName: '',
   date: '',

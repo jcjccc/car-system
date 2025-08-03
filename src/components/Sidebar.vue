@@ -11,23 +11,15 @@
       <i class="el-icon-house"></i>
       <span>录入单号</span>
     </el-menu-item>
-    <el-menu-item index="/user">
-      <i class="el-icon-user"></i>
-      <span>审批单号</span>
-    </el-menu-item>
-    <el-menu-item index="/record3">
-      <i class="el-icon-house"></i>
-      <span>录入报销</span>
-    </el-menu-item>
-    <el-menu-item index="/user1">
+    <el-menu-item index="/reimburse">
       <i class="el-icon-user"></i>
       <span>审批报销</span>
     </el-menu-item>
-    <el-menu-item index="/user2">
+    <el-menu-item index="/carGrossProfit">
       <i class="el-icon-user"></i>
-      <span>车辆毛利</span>
+      <span>车辆净利润</span>
     </el-menu-item>
-    <el-menu-item index="/record3">
+    <el-menu-item index="/employeeSalary">
       <i class="el-icon-house"></i>
       <span>员工工资</span>
     </el-menu-item>

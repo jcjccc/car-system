@@ -9,14 +9,15 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router'
 const user = {
   name: '张炜',
   avatar: 'https://i.pravatar.cc/40', // 示例头像地址
 }
 
 const logout = () => {
-  // 在此处调用退出登录的逻辑
-  alert('退出登录')
+  localStorage.removeItem('token')
+  router.push('/login')
 }
 </script>
 

@@ -1,15 +1,5 @@
-<!-- src/App.vue -->
 <template>
-  <div class="layout">
-    <Sidebar />
-    <div class="main">
-      <Header />
-      <header>
-        <div class="logo"></div>
-      </header>
-      <router-view />
-    </div>
-  </div>
+  <router-view />
 </template>
 
 <script setup lang="ts">

@@ -3,18 +3,10 @@
     <div>
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="日期">
-          <el-input
-            v-model="formInline.month"
-            placeholder="选择日期"
-            clearable
-          />
+          <el-input v-model="formInline.month" placeholder="选择日期" clearable />
         </el-form-item>
         <el-form-item label="车牌号">
-          <el-input
-            v-model="formInline.carNumber"
-            placeholder="车牌号"
-            clearable
-          />
+          <el-input v-model="formInline.carNumber" placeholder="车牌号" clearable />
         </el-form-item>
         <el-form-item label="司机名称">
           <el-select
@@ -26,7 +18,7 @@
             <el-option label="Zone two" value="beijing" />
           </el-select>
         </el-form-item>
-        <el-form-item label="审批状态">
+         <el-form-item label="审批状态">
           <el-select
             v-model="formInline.userName"
             placeholder="审批状态"
@@ -36,10 +28,6 @@
             <el-option label="审批通过" value="beijing" />
             <el-option label="审批不通过" value="beijing" />
           </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleSearch">查询</el-button>
-          <el-button type="primary" @click="handleRecord">录入</el-button>
         </el-form-item>
       </el-form>
       <TableData></TableData>
@@ -52,26 +40,27 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { reactive, ref } from 'vue'
 import TableData from "./TableData/index.vue";
-import RecordDialog from "./components/RecordAndApproveDialog.vue";
 
-const isShowRecordDialog = ref(false);
+const isShowRecordDialog = ref(false)
 
 const formInline = reactive({
-  month: "",
-  carNumber: "",
-  userName: "",
-  date: "",
-});
+  month: '',
+  carNumber: '',
+  userName: '',
+  date: '',
+})
 
 const handleSearch = () => {
-  console.log("search!");
-};
+  console.log('search!')
+}
 
 const handleRecord = () => {
-  isShowRecordDialog.value = true;
-};
+  isShowRecordDialog.value = true
+  console.log('录入记录')
+  console.log('handleRecord!')
+}
 </script>
 
 <style>

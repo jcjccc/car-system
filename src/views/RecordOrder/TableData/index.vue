@@ -1,50 +1,71 @@
 <template>
   <div>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="date" label="日期" />
-      <el-table-column prop="carNumber" label="车牌号" />
-      <el-table-column prop="expenseType" label="费用类型" />
-      <el-table-column prop="expense" label="费用" />
-      <el-table-column prop="unitPrice" label="审批结果" />
-      <el-table-column prop="remark" label="备注" />
-      <el-table-column prop="approvalStatus" label="审批状态" />
-      <!-- 操作列 -->
-      <el-table-column label="操作" fixed="right">
-        <template #default="scope">
-          <el-button size="small" type="primary" @click="handleEdit(scope.row)">
-            编辑
-          </el-button>
-          <el-button
-            size="small"
-            type="primary"
-            @click="handleApprove(scope.row)"
-          >
-            审批
-          </el-button>
-          <el-button
-            size="small"
-            type="primary"
-            @click="handleApprove(scope.row)"
-          >
-            操作日志
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <ApproveDialog :visible.sync="isShowApproveDialog"></ApproveDialog>
+    <div>
+      <el-table :data="tableData" border style="width: 100%">
+        <el-table-column prop="date" label="日期" />
+        <el-table-column prop="carNumber" label="车号" />
+        <el-table-column prop="driverName" label="驾驶员" />
+        <el-table-column prop="startPoint" label="起点" />
+        <el-table-column prop="endPoint" label="终点" />
+        <el-table-column prop="unitPrice" label="单价" />
+        <el-table-column prop="tonnage" label="吨数" />
+        <el-table-column prop="remark" label="备注" />
+        <el-table-column prop="approvalStatus" label="审批状态" />
+        <!-- 操作列 -->
+        <el-table-column label="操作"  width="300" fixed="right">
+          <template #default="scope">
+            <el-button
+              size="small"
+              type="primary"
+              @click="handleEdit(scope.row)"
+            >
+              编辑
+            </el-button>
+            <el-button
+              size="small"
+              type="primary"
+              @click="handleApprove(scope.row)"
+            >
+              审批
+            </el-button>
+            <el-button
+              size="small"
+              type="primary"
+              @click="handleLog(scope.row)"
+            >
+              操作日志
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <RecordDialog v-model:visible="isShowRecordDialog"></RecordDialog>
+    <ApproveDialog v-model:visible="isShowApproveDialog"></ApproveDialog>
+    <LogDialog v-model="isShowLogDialog" :recordId="rowData.id"></LogDialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
 import ApproveDialog from "../components/ApproveDialog.vue";
-const isShowApproveDialog = ref(false);
+import RecordDialog from "../components/RecordAndApproveDialog.vue";
+import LogDialog from "../components/LogDialog.vue";
+const isShowApproveDialog = ref(false); // 审批弹窗
+const isShowRecordDialog = ref(false); // 编辑弹窗
+const isShowLogDialog = ref(false); // 操作日志弹窗
+
+const rowData = ref({
+    id: null,
+}); // 当前行数据
 const handleEdit = (row: any) => {
-  console.log("编辑行:", row);
+  isShowRecordDialog.value = true;
 };
 const handleApprove = (row: any) => {
   isShowApproveDialog.value = true;
-  console.log("审批行:", row);
+};
+const handleLog = (row: any) => {
+  rowData.value = row;
+  isShowLogDialog.value = true;
 };
 const tableData = [
   {
@@ -52,8 +73,6 @@ const tableData = [
     date: "2023-10",
     carNumber: "粤B12345",
     driverName: "张三",
-    expenseType: "油费",
-    expense: 2000,
     carCount: 2,
     tonnage: 30,
     startPoint: "广州",
@@ -67,13 +86,11 @@ const tableData = [
     actualLabor: 1640,
     teamName: "第一车队",
     remark: "按时完成",
-    approvalStatus: "待审批",
   },
   {
     id: 2,
     date: "2023-10",
-    expenseType: "修车费",
-    expense: 1500,
+
     carNumber: "粤B67890",
     driverName: "李四",
     carCount: 1,
@@ -90,7 +107,6 @@ const tableData = [
     actualLabor: 1000,
     teamName: "第二车队",
     remark: "",
-    approvalStatus: "通过",
   },
   {
     id: 3,
@@ -98,8 +114,6 @@ const tableData = [
     date: "2023-10",
 
     driverName: "王五",
-    expenseType: "过路费",
-    expense: 800,
     carCount: 3,
     startPoint: "韶关",
     endPoint: "广州",
@@ -114,14 +128,11 @@ const tableData = [
     actualLabor: 2460,
     teamName: "第一车队",
     remark: "优质司机",
-    approvalStatus: "未通过",
   },
   {
     id: 4,
     carNumber: "粤B13579",
     driverName: "赵六",
-    expenseType: "过路费",
-
     carCount: 2,
     tonnage: 25,
     startPoint: "韶关",
@@ -136,8 +147,6 @@ const tableData = [
     extraAudit: 150,
     totalLabor: 1630,
     actualLabor: 1230,
-    approvalStatus: "通过",
-
     teamName: "第三车队",
     remark: "",
   },
@@ -160,8 +169,6 @@ const tableData = [
     totalLabor: 1110,
     actualLabor: 910,
     teamName: "第二车队",
-    approvalStatus: "通过",
-
     remark: "需审核资料",
   },
   {
@@ -182,8 +189,6 @@ const tableData = [
     extraAudit: 250,
     totalLabor: 2470,
     actualLabor: 1870,
-    approvalStatus: "待审批",
-
     teamName: "第三车队",
     remark: "迟到",
   },

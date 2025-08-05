@@ -3,15 +3,14 @@
     <div>
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="date" label="日期" />
-        <el-table-column prop="carNumber" label="车号" />
-        <el-table-column prop="driverName" label="驾驶员" />
-        <el-table-column prop="startPoint" label="起点" />
-        <el-table-column prop="endPoint" label="终点" />
-        <el-table-column prop="unitPrice" label="单价" />
-        <el-table-column prop="tonnage" label="吨数" />
+        <el-table-column prop="carNumber" label="车牌号" />
+        <el-table-column prop="expenseType" label="费用类型" />
+        <el-table-column prop="expense" label="费用" />
+        <el-table-column prop="unitPrice" label="审批结果" />
         <el-table-column prop="remark" label="备注" />
+        <el-table-column prop="approvalStatus" label="审批状态" />
         <!-- 操作列 -->
-        <el-table-column label="操作" fixed="right">
+        <el-table-column label="操作" fixed="right" width="300" align="center">
           <template #default="scope">
             <el-button
               size="small"
@@ -30,7 +29,7 @@
             <el-button
               size="small"
               type="primary"
-              @click="handleApprove(scope.row)"
+              @click="handleLog(scope.row)"
             >
               操作日志
             </el-button>
@@ -38,20 +37,33 @@
         </el-table-column>
       </el-table>
     </div>
-    <ApproveDialog :visible.sync="isShowApproveDialog"></ApproveDialog>
+    <ReimburseDialog v-model:visible="isShowRecordDialog"></ReimburseDialog>
+    <ApproveDialog v-model:visible="isShowApproveDialog"></ApproveDialog>
+    <LogDialog v-model="isShowLogDialog" :recordId="rowData.id"></LogDialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
 import ApproveDialog from "../components/ApproveDialog.vue";
-const isShowApproveDialog = ref(false);
+import ReimburseDialog from "../components/ReimburseDialog.vue";
+import LogDialog from "../components/LogDialog.vue";
+const isShowApproveDialog = ref(false); // 审批弹窗
+const isShowRecordDialog = ref(false); // 编辑弹窗
+const isShowLogDialog = ref(false); // 操作日志弹窗
+
+const rowData = ref({
+  id: null,
+}); // 当前行数据
 const handleEdit = (row: any) => {
-  console.log("编辑行:", row);
+  isShowRecordDialog.value = true;
 };
 const handleApprove = (row: any) => {
   isShowApproveDialog.value = true;
-  console.log("审批行:", row);
+};
+const handleLog = (row: any) => {
+  rowData.value = row;
+  isShowLogDialog.value = true;
 };
 const tableData = [
   {

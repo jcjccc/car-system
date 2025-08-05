@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import router from '@/router'
 const user = {
-  name: '张炜',
+  name: '张三',
   avatar: 'https://i.pravatar.cc/40', // 示例头像地址
 }
 

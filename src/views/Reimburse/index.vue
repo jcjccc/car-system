@@ -47,14 +47,14 @@
     <div class="pagination-wrapper">
       <el-pagination background layout="prev, pager, next" :total="1000" />
     </div>
-    <RecordDialog v-model:visible="isShowRecordDialog"></RecordDialog>
+    <ReimburseDialog v-model:visible="isShowRecordDialog"></ReimburseDialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import TableData from "./TableData/index.vue";
-import RecordDialog from "./components/RecordAndApproveDialog.vue";
+import ReimburseDialog from "./components/ReimburseDialog.vue";
 
 const isShowRecordDialog = ref(false);
 
@@ -71,6 +71,8 @@ const handleSearch = () => {
 
 const handleRecord = () => {
   isShowRecordDialog.value = true;
+  console.log("录入记录");
+  console.log("handleRecord!");
 };
 </script>
 

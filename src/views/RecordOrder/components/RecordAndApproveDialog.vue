@@ -24,13 +24,13 @@
         <el-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="单价">
-        <el-input v-model="form.name" />
+        <el-input-number v-model="num"  @change="handleChange" />
       </el-form-item>
       <el-form-item label="吨位1">
-        <el-input v-model="form.name" />
+        <el-input-number v-model="num" @change="handleChange" />
       </el-form-item>
       <el-form-item label="吨位2">
-        <el-input v-model="form.name" />
+        <el-input-number v-model="num" @change="handleChange" />
       </el-form-item>
     </el-form>
 
